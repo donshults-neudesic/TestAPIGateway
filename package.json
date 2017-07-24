@@ -1,0 +1,26 @@
+{
+  "name": "testapigateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "faker": "^4.1.0",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-zip": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donshults-neudesic/TestAPIGateway.git"
+  },
+  "author": "Don Shults",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/donshults-neudesic/TestAPIGateway/issues"
+  },
+  "homepage": "https://github.com/donshults-neudesic/TestAPIGateway#readme"
+}
