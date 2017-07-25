@@ -1,4 +1,22 @@
 var gulp = require('gulp');
+var lambda = require('gulp-awslambda');
+var zip = require('gulp-zip')
+
+var lambda_params = {
+	FunctionName: 'getInventory',
+	Role: 'arn:aws:iam::615275379173:role/lambda_basic_execution'
+};
+
+var opts = {
+	region: 'us-west-2'
+};
+gulp.task('default',function(){
+    return gulp.src(['*.js','node_modules/**'] )
+        .pipe(zip('getOrder.zip'))
+        .pipe(lambda(lambda_params, opts))
+        .pipe(gulp.dest('.'));
+});
+
 gulp.task('helloworld', function(){
     console.log("Hello World");
 

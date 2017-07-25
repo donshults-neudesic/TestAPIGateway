@@ -9,7 +9,10 @@
     "gulp-clean": "^0.3.2",
     "gulp-zip": "^4.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp-awslambda": "^0.4.0",
+    "gulp-zip": "^4.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
