@@ -1,4 +1,12 @@
 var faker = require('faker');
+var AWS = require('aws-sdk');
+var ep = new AWS.Endpoint("dynamodb.us-west-2.amazonaws.com");
+AWS.config.update({
+  region: "us-west-2",
+  endpoint: ep
+});
+
+
 
 exports.handler = function(event, context){
   // return order details for a given order
@@ -12,9 +20,29 @@ exports.handler = function(event, context){
   order.phone = getPhone();
   order.shipMethod = getShipMethod();
   order.price = getPrice();
+  UpdateDb(order);
   context.succeed(order);
 }
 
+function UpdateDb(order){
+var docClient = new AWS.DynamoDB.DocumentClient();
+var table = "Shoes";
+var params = {
+  TableName: table,
+  Item: {
+    "orderId": order.orderId,
+    "orderName": order.name,
+    "price": order.price
+  }
+}
+  docClient.put(params,function(err,data){
+    if(err){
+      console.error("Unable to add item. Error JSON:", JSON.stringify(err,null,2));
+    }else{
+      console.log("Added item:", JSON.stringify(data,null,2));
+    }
+  });
+}
 function getName() {
   return faker.name.findName();
 }

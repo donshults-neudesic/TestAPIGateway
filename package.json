@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.94.0",
     "faker": "^4.1.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",

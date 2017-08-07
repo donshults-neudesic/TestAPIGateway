@@ -1,4 +1,5 @@
 var faker = require('faker');
+var AWS = require("aws-sdk");
 
 exports.handler = function(event, context){
   // return an array of 10 items in inventory
