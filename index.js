@@ -1,10 +1,6 @@
 var faker = require('faker');
 var AWS = require("aws-sdk/dist/aws-sdk");
-//var ep = new AWS.Endpoint("dynamodb.us-west-2.amazonaws.com");
-/*AWS.config.update({
-  region: "us-west-2",
-  endpoint: ep
-});*/
+var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'});
 
 exports.handler = function(event, context, callback){
   // return an array of 10 items in inventory
@@ -30,7 +26,7 @@ exports.handler = function(event, context, callback){
 }
 
 function UpdateDb(movie){
-var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'});
+
 var table = "Movies";
 var params = {
   TableName: table,
