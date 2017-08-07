@@ -1,5 +1,5 @@
 var faker = require('faker');
-var AWS = require("aws-sdk/dist/aws-sdk");
+var AWS = require("aws-sdk");
 var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'});
 
 exports.handler = function(event, context, callback){
