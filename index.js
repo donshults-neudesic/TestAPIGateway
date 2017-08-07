@@ -1,12 +1,12 @@
 var faker = require('faker');
 var AWS = require("aws-sdk/dist/aws-sdk");
-var ep = new AWS.Endpoint("dynamodb.us-west-2.amazonaws.com");
-AWS.config.update({
+//var ep = new AWS.Endpoint("dynamodb.us-west-2.amazonaws.com");
+/*AWS.config.update({
   region: "us-west-2",
   endpoint: ep
-});
+});*/
 
-exports.handler = function(event, context){
+exports.handler = function(event, context, callback){
   // return an array of 10 items in inventory
   // include product name, color, description
   // size, and price
@@ -30,7 +30,7 @@ exports.handler = function(event, context){
 }
 
 function UpdateDb(movie){
-var docClient = new AWS.DynamoDB.DocumentClient();
+var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'});
 var table = "Movies";
 var params = {
   TableName: table,
@@ -41,9 +41,9 @@ var params = {
 }
   docClient.put(params,function(err,data){
     if(err){
-      console.error("Unable to add item. Error JSON:", JSON.stringify(err,null,2));
+      callback(err,null);
     }else{
-      console.log("Added item:", JSON.stringify(data,null,2));
+      callback(null,data);
     }
   });
 }
