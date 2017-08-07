@@ -25,8 +25,8 @@ exports.handler = function(event, context, callback){
     movie.movieName = item.name;
     UpdateDb(movie);
   }
-  
-  context.succeed(inventory);
+  callback(null,movie);
+  //context.succeed(inventory);
 }
 
 function UpdateDb(movie){
