@@ -19,6 +19,7 @@ exports.handler = function(event, context){
   context.succeed(inventory);
 }
 
+
 function getMyShoe() {
   var shoeType = [
     "running shoe",
