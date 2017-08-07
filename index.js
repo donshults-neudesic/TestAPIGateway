@@ -1,5 +1,5 @@
 console.log('Loading event');
-var AWS = require('aws-sdk');
+var AWS = require('aws-sdk/dist/aws-sdk');
 var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
 exports.handler = function(event, context) {
