@@ -7,6 +7,7 @@ exports.handler = function(event, context, callback){
   // include product name, color, description
   // size, and price
   var inventory = [];
+  var movie = {};
   for (var i = 0; i < 10; i++){
     var myShoe = getMyShoe();
     var item = {};
@@ -16,7 +17,6 @@ exports.handler = function(event, context, callback){
     item.size = getShoeSize();
     item.price = getShoePrice();
     inventory.push(item);
-    var movie = {};
     movie.movieId = i;
     movie.movieName = item.name;
     UpdateDb(movie);
