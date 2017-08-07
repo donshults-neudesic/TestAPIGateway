@@ -1,5 +1,10 @@
 var faker = require('faker');
 var AWS = require("aws-sdk/dist/aws-sdk");
+var ep = new AWS.Endpoint("dynamodb.us-west-2.amazonaws.com");
+AWS.config.update({
+  region: "us-west-2",
+  endpoint: ep
+});
 
 exports.handler = function(event, context){
   // return an array of 10 items in inventory
@@ -15,10 +20,33 @@ exports.handler = function(event, context){
     item.size = getShoeSize();
     item.price = getShoePrice();
     inventory.push(item);
+    var movie = {};
+    movie.movieId = i;
+    movie.movieName = item.name;
+    UpdateDb(movie);
   }
+  
   context.succeed(inventory);
 }
 
+function UpdateDb(movie){
+var docClient = new AWS.DynamoDB.DocumentClient();
+var table = "Movies";
+var params = {
+  TableName: table,
+  Item: {
+    "movieId": movie.movieId,
+    "movieName": movie.movieName
+  }
+}
+  docClient.put(params,function(err,data){
+    if(err){
+      console.error("Unable to add item. Error JSON:", JSON.stringify(err,null,2));
+    }else{
+      console.log("Added item:", JSON.stringify(data,null,2));
+    }
+  });
+}
 
 function getMyShoe() {
   var shoeType = [
