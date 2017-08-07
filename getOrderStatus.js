@@ -8,6 +8,7 @@ AWS.config.update({
 
 
 
+
 exports.handler = function(event, context){
   // return order details for a given order
   var order = {};
