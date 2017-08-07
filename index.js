@@ -3,38 +3,15 @@ var AWS = require("aws-sdk/dist/aws-sdk");
 var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'});
 
 exports.handler = function(event, context, callback){
-  // return an array of 10 items in inventory
-  // include product name, color, description
-  // size, and price
-  var inventory = [];
-  var movie = {};
-  for (var i = 0; i < 10; i++){
-    var myShoe = getMyShoe();
-    var item = {};
-    item.name = getShoeName(myShoe);
-    item.color = getShoeColor();
-    item.description = getShoeDescription(myShoe);
-    item.size = getShoeSize();
-    item.price = getShoePrice();
-    inventory.push(item);
-    movie.movieId = i;
-    movie.movieName = item.name;
-    UpdateDb(movie);
-  }
-  //callback(null,movie);
-  //context.succeed(inventory);
-}
-
-function UpdateDb(movie){
-
 var table = "Movies";
 var params = {
   TableName: table,
   Item: {
-    "movieId": movie.movieId,
-    "movieName": movie.movieName
+    "movieId": Math.floor((Math.random() * 100) + 1),
+    "movieName": "GhostBusters"
   }
 }
+
   docClient.put(params,function(err,data){
     if(err){
       callback(err,null);
@@ -42,6 +19,13 @@ var params = {
       callback(null,data);
     }
   });
+  //callback(null,movie);
+  //context.succeed(inventory);
+}
+
+function UpdateDb(movie){
+
+
 }
 
 function getMyShoe() {
